@@ -41,15 +41,16 @@ namespace WindowsFormsApplication1
             this.Width = largeur;
             this.Height = longueur;
             this.StartPosition = FormStartPosition.CenterScreen;
+            this.BackColor = Color.Black;
             PongTimer.Tick += new EventHandler(PongTime_Tick);
             picJoueur1.Size = tJoueur;
             picJoueur1.Location = new Point(picJoueur1.Width / 2, ClientSize.Height / 2 - picJoueur1.Height / 2);
-            picJoueur1.BackColor = Color.Blue;
+            picJoueur1.BackColor = Color.White;
             this.Controls.Add(picJoueur1);
  
             picJoueur2.Size = tJoueur;
             picJoueur2.Location = new Point(ClientSize.Width - (picJoueur2.Width + picJoueur2.Width / 2), ClientSize.Height / 2 - picJoueur2.Height / 2);
-            picJoueur2.BackColor = Color.Red;
+            picJoueur2.BackColor = Color.White;
             this.Controls.Add(picJoueur2);
  
             picBalle.Size = tBalle;
@@ -83,6 +84,7 @@ namespace WindowsFormsApplication1
                 resetBall();
             }
         }
+
 
         }
 
