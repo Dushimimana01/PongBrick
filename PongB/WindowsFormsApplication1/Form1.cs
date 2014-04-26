@@ -41,7 +41,7 @@ namespace WindowsFormsApplication1
             this.Width = largeur;
             this.Height = longueur;
             this.StartPosition = FormStartPosition.CenterScreen;
- 
+            PongTimer.Tick += new EventHandler(PongTime_Tick);
             picJoueur1.Size = tJoueur;
             picJoueur1.Location = new Point(picJoueur1.Width / 2, ClientSize.Height / 2 - picJoueur1.Height / 2);
             picJoueur1.BackColor = Color.Blue;
@@ -60,6 +60,7 @@ namespace WindowsFormsApplication1
         void PongTime_Tick(object sender, EventArgs e)
         {
             picBalle.Location = new Point(picBalle.Location.X + vitesse, picBalle.Location.Y + vitesse);
+            Collisions();
            
         }
         private void resetBall()
@@ -85,7 +86,7 @@ namespace WindowsFormsApplication1
 
         }
 
-       
+      
 
     }
-}
+
