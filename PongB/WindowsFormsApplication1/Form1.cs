@@ -57,7 +57,31 @@ namespace WindowsFormsApplication1
             picBalle.BackColor = Color.Green;
             this.Controls.Add(picBalle);
         }
-        
+        void PongTime_Tick(object sender, EventArgs e)
+        {
+            picBalle.Location = new Point(picBalle.Location.X + vitesse, picBalle.Location.Y + vitesse);
+           
+        }
+        private void resetBall()
+        {
+            picBalle.Location = new Point(ClientSize.Width / 2 - picBalle.Width / 2, ClientSize.Height / 2 - picBalle.Height / 2);
+        }
+		
+        private void Collisions()
+        {
+            if (picBalle.Location.Y > ClientSize.Height - picBalle.Height || picBalle.Location.Y < 0)
+            {
+               vitesse = -vitesse;
+            }
+            else if (picBalle.Location.X > ClientSize.Width)
+            {
+                resetBall();
+            }
+            else if (picBalle.Location.X < 0)
+            {
+                resetBall();
+            }
+        }
 
         }
 
