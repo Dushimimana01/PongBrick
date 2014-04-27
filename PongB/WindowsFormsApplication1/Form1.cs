@@ -55,13 +55,17 @@ namespace WindowsFormsApplication1
  
             picBalle.Size = tBalle;
             picBalle.Location = new Point(ClientSize.Width / 2 - picBalle.Width / 2, ClientSize.Height / 2 - picBalle.Height / 2);
-            picBalle.BackColor = Color.Green;
+            picBalle.BackColor = Color.White;
             this.Controls.Add(picBalle);
         }
         void PongTime_Tick(object sender, EventArgs e)
         {
-            picBalle.Location = new Point(picBalle.Location.X + vitesse, picBalle.Location.Y + vitesse);
+            picBalle.Location = new Point(picBalle.Location.X + vitesse, picBalle.Location.Y);
             Collisions();
+            CollisionJ();
+            DeplacementJ1();
+            DeplacementJ2();
+            
            
         }
         private void resetBall()
@@ -84,7 +88,35 @@ namespace WindowsFormsApplication1
                 resetBall();
             }
         }
+        private void DeplacementJ1()
+        {
+            if (this.PointToClient(MousePosition).Y >= picJoueur1.Height / 2 && this.PointToClient(MousePosition).Y <= ClientSize.Height - picJoueur1.Height / 2)
+            {
+                int playerX = picJoueur1.Width / 2;
+                int playerY = this.PointToClient(MousePosition).Y - picJoueur1.Height / 2;
 
+                picJoueur1.Location = new Point(playerX, playerY);
+            }
+        }
+        private void DeplacementJ2()
+        {
+            if (vitesse> 0)
+            {
+                picJoueur2.Location = new Point(ClientSize.Width - (picBalle.Width + picJoueur2.Width / 2), picBalle.Location.Y - picJoueur2.Height / 2);
+            }
+        }
+        private void CollisionJ()
+        {
+            if (picBalle.Bounds.IntersectsWith(picJoueur2.Bounds))
+            {
+                vitesse = -vitesse;
+            }
+
+            if (picBalle.Bounds.IntersectsWith(picJoueur1.Bounds))
+            {
+                vitesse = -vitesse;
+            }
+        }
 
         }
 
