@@ -28,11 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            
+            this.playground = new System.Windows.Forms.Panel();
+            this.SuspendLayout();
+            // 
+            // playground
+            // 
+            this.playground.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playground.Location = new System.Drawing.Point(0, 0);
+            this.playground.Name = "playground";
+            this.playground.Size = new System.Drawing.Size(284, 262);
+            this.playground.TabIndex = 0;
+            // 
+            // Form1
+            // 
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.playground);
+            this.Name = "Form1";
+            this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private System.Windows.Forms.Panel playground;
     }
 }
 
