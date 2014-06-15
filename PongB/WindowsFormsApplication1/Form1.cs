@@ -88,12 +88,12 @@ namespace WindowsFormsApplication1
 
                 point += 1;
                 picPoints.Text = point.ToString();
-
+                string phraseClient = "Vitesse est"+" "+ Math.Abs(vitessey) + " et" + "le score est " + point.ToString();
 
                 byte[] sndBytes = new byte[10];
                 ASCIIEncoding encoder = new ASCIIEncoding();
-                sndBytes = encoder.GetBytes(point.ToString());
-                stream.Write(sndBytes, 0,point.ToString().Length);
+                sndBytes = encoder.GetBytes(phraseClient);
+                stream.Write(sndBytes, 0,phraseClient.Length);
                 stream.Flush();
             }
 
@@ -152,6 +152,11 @@ namespace WindowsFormsApplication1
 
 
            }
+       }
+
+       private void Form1_Load(object sender, EventArgs e)
+       {
+
        }
        
        

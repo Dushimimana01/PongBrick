@@ -57,10 +57,11 @@ namespace WindowsFormsApplication1
         {
             if (balle.Bounds.IntersectsWith(this.Bounds))
             {
-
+                vitessex += 4;
+                vitessey += 4;
                 vitessex = -vitessex;
                 vitessey = -vitessey;
-
+                
             }
 
             

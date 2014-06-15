@@ -89,6 +89,7 @@
             this.ClientSize = new System.Drawing.Size(680, 502);
             this.Controls.Add(this.playground);
             this.Name = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.picMilieu)).EndInit();
             this.playground.ResumeLayout(false);
