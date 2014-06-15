@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace WindowsFormsApplication1
 {
     class Paddle: PictureBox
@@ -25,12 +26,12 @@ namespace WindowsFormsApplication1
         }
         public void Collisions(int vx,int vy,Panel p)
         {
-            if (this.Top <= p.Top )
+            if (this.Top <= p.ClientRectangle.Bottom )
             {
 
                 vy = -vy;
             }
-            else if (this.Location.X > p.Width)
+            else if (this.Location.X < 0)
             {
                 resetBall();
             }
