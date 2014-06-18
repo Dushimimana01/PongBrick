@@ -1,5 +1,5 @@
 ﻿using System;
-using System;
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +16,8 @@ namespace WindowsFormsApplication1
 {
     public partial class Form1 : Form
     {
-        Paddle picJoueur1, picJoueur2, picBalle;
+        Paddle picJoueur1, picJoueur2; 
+        Balle   picBalle;
         public int point = 0;
         const int longueur = 600;
         const int largeur = 400;
@@ -38,13 +39,13 @@ namespace WindowsFormsApplication1
 
             picMilieu.Location = new Point(playground.Width / 2 + picMilieu.Width / 2);
             picPoints.Left = playground.Left + picPoints.Width;
-            /*picJoueur2 = new Paddle(10, 60);
-             picJoueur2.Location = new Point(playground.Left - picJoueur2.Width/2, playground.Height / 2 - picJoueur2.Height / 2);
-             playground.Controls.Add(picJoueur2);*/
+            picJoueur2 = new Paddle(10, 60);
+            picJoueur2.Location = new Point(playground.Left - picJoueur2.Width/2, playground.Height / 2 - picJoueur2.Height / 2);
+            playground.Controls.Add(picJoueur2);
 
             Cursor.Hide();
-            picBalle = new Paddle(7, 7);
-            picBalle.Location = new Point(playground.Width / 2 - picBalle.Width / 2, playground.Height / 2 - picBalle.Height / 2);
+            picBalle = new Balle (7);
+            picBalle.resetBall(playground);
             playground.Controls.Add(picBalle);
 
             pongTimer.Enabled = true;
@@ -53,8 +54,7 @@ namespace WindowsFormsApplication1
             this.Height = longueur;
             this.StartPosition = FormStartPosition.CenterScreen;
             this.BackColor = Color.Black;
-            //PongTimer.Tick += new EventHandler(PongTime_Tick);
-
+          
             picGameover.Visible = false;
 
             client.Connect(serverAddress, 8001);
@@ -70,49 +70,42 @@ namespace WindowsFormsApplication1
 
         private void pongTimer_Tick(object sender, System.EventArgs e)
         {
+            
             picBalle.Left += vitessex;
             picBalle.Top += vitessey;
+            
             Collision();
-            Collis();
-            th = new Thread(Networking);
-            th.Start();
-            picJoueur1.DeplacementJ1();
-            //picJoueur2.DeplacementJ2(vitessex,picBalle,playground);
-        }
+            CollisionP();
 
-        public void Collis()
+           
+            //th = new Thread(Networking);
+            //th.Start();
+            picJoueur1.DeplacementJ1();
+           // picJoueur1.Deplauto(vitessex, picBalle, playground);
+            picJoueur2.DeplacementJ2(vitessex,picBalle,playground);
+        }//Timer
+
+        public void CollisionP()
         {
             if (picBalle.Bounds.IntersectsWith(picJoueur1.Bounds))
             {
-
+               
                 vitessex = -vitessex;
-                vitessey = -vitessey;
-                /* if (vitessex < 0){vitessex -=1;}
-                  if (vitessex > 0){vitessex +=1;}
-                  if (vitessey < 0){vitessey -=1;}
-                  if (vitessey > 0){vitessey +=1;}*/
+                //vitessey = -vitessey;
                 point += 1;
-                picPoints.Text = point.ToString();
-            }
-        }
-        public void Networking(){
-            picPoints.Text = point.ToString();
-            string phraseClient = "Vitesse est" + " " + Math.Abs(vitessey) + " et" + "le score est " + point.ToString();
+                 picPoints.Text = point.ToString();
+             }
+            
+             if (picBalle.Bounds.IntersectsWith(picJoueur2.Bounds))
+          {
 
-            byte[] sndBytes = new byte[10];
-            ASCIIEncoding encoder = new ASCIIEncoding();
-            sndBytes = encoder.GetBytes(phraseClient);
-            stream.Write(sndBytes, 0, phraseClient.Length);
-            stream.Flush();
-        }
+              vitessex = -vitessex;
+              //vitessey = -vitessey;
 
-        /* if (picBalle.Bounds.IntersectsWith(picJoueur2.Bounds))
-         {
+          }
 
-             vitessex = -vitessex;
-             vitessey = -vitessey;
-
-         }*/
+         }//Collision avec les joueurs
+                
         public void Collision()
         {
 
@@ -137,10 +130,26 @@ namespace WindowsFormsApplication1
                 //  PongTimer.Enabled = false;
                 picGameover.Visible = true;
                 pongTimer.Enabled = false;
+                string phraseClient = "Game Over votre score est "+point.ToString();
+
+                Networking(phraseClient);
+
             }
 
 
-        }
+        }//Collision avec les extremités de la surface de jeu
+
+        public void Networking(string p)
+        {
+            
+            
+
+            byte[] sndBytes = new byte[10];
+            ASCIIEncoding encoder = new ASCIIEncoding();
+            sndBytes = encoder.GetBytes(p);
+            stream.Write(sndBytes, 0, p.Length);
+            stream.Flush();
+        }//communicatipon réseau
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -155,17 +164,14 @@ namespace WindowsFormsApplication1
                 point = 0;
                 picPoints.Text = "0";
 
-                // PongTimer.Enabled = true;
+
                 picGameover.Visible = false;
                 pongTimer.Enabled = true;
 
 
 
             }
-        }
-
-
-
+        }// restart et quitter
 
     }
 }

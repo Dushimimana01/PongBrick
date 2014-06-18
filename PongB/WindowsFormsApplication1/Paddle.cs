@@ -18,67 +18,38 @@ namespace WindowsFormsApplication1
         public Paddle() { }
         public Paddle(int width, int height)
         {
-
+            
+          
             Size s = new Size(width, height);
             this.BackColor = Color.White;
             this.Size = s;
 
 
-        }
-        public void Collisions(int vx, int vy, Panel p)
-        {
-            if (this.Top <= p.ClientRectangle.Bottom)
-            {
-
-                vy = -vy;
-            }
-            else if (this.Location.X < 0)
-            {
-                resetBall(p);
-            }
-            else if (this.Bottom >= p.Bottom)
-            {
-                resetBall(p);
-            }
-
-        }
-        public void resetBall(Panel p)
-        {
-            Random top = new Random();
-            Random left = new Random();
-            this.Top = top.Next(0, p.Height);
-            this.Left = left.Next(0, p.Width);
-
-        }
-
+        }//initialisation du joueur
 
         public void DeplacementJ1()
         {
             this.Top = Cursor.Position.Y - (this.Height * 2);
-        }
+        }//Deplacement du joueur avec la souris
 
-        public void CollisionJ(Paddle balle, int vitessex, int vitessey)
+        public void Deplauto(int vitessex, Balle balle, Panel p)
         {
-            if (balle.Bounds.IntersectsWith(this.Bounds))
+
+            if (vitessex < 0)
             {
-                vitessex += 4;
-                vitessey += 4;
-                vitessex = -vitessex;
-                vitessey = -vitessey;
-
+                this.Location = new Point((balle.Width + this.Width / 2), balle.Location.Y - this.Height / 2);
             }
+        
+        
+        }//Depalcement automatiqe du joueur
 
-
-
-        }
-
-        public void DeplacementJ2(int vitessex, Paddle balle, Panel p)
+        public void DeplacementJ2(int vitessex, Balle balle, Panel p)
         {
             if (vitessex > 0)
             {
                 this.Location = new Point(p.Width - (balle.Width + this.Width / 2), balle.Location.Y - this.Height / 2);
             }
-        }
+        }//Deplacement du joueur 2
 
     }
 }

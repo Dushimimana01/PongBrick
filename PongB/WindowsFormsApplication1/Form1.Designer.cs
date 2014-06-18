@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.playground = new System.Windows.Forms.Panel();
-            this.pongTimer = new System.Windows.Forms.Timer(this.components);
-            this.picMilieu = new System.Windows.Forms.PictureBox();
-            this.picPoints = new System.Windows.Forms.Label();
             this.picGameover = new System.Windows.Forms.Label();
+            this.picPoints = new System.Windows.Forms.Label();
+            this.picMilieu = new System.Windows.Forms.PictureBox();
+            this.pongTimer = new System.Windows.Forms.Timer(this.components);
             this.playground.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMilieu)).BeginInit();
             this.SuspendLayout();
@@ -50,20 +50,16 @@
             this.playground.Size = new System.Drawing.Size(721, 556);
             this.playground.TabIndex = 0;
             // 
-            // pongTimer
+            // picGameover
             // 
-            this.pongTimer.Interval = 10;
-            this.pongTimer.Tick += new System.EventHandler(this.pongTimer_Tick);
-            // 
-            // picMilieu
-            // 
-            this.picMilieu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.picMilieu.BackColor = System.Drawing.Color.White;
-            this.picMilieu.Location = new System.Drawing.Point(324, 3);
-            this.picMilieu.Name = "picMilieu";
-            this.picMilieu.Size = new System.Drawing.Size(10, 541);
-            this.picMilieu.TabIndex = 1;
-            this.picMilieu.TabStop = false;
+            this.picGameover.AutoSize = true;
+            this.picGameover.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.picGameover.ForeColor = System.Drawing.Color.White;
+            this.picGameover.Location = new System.Drawing.Point(3, 430);
+            this.picGameover.Name = "picGameover";
+            this.picGameover.Size = new System.Drawing.Size(303, 117);
+            this.picGameover.TabIndex = 3;
+            this.picGameover.Text = "Game over\r\nPress F1 to restart\r\nPress Esc to quit\r\n";
             // 
             // picPoints
             // 
@@ -77,16 +73,20 @@
             this.picPoints.TabIndex = 2;
             this.picPoints.Text = "0";
             // 
-            // picGameover
+            // picMilieu
             // 
-            this.picGameover.AutoSize = true;
-            this.picGameover.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.picGameover.ForeColor = System.Drawing.Color.White;
-            this.picGameover.Location = new System.Drawing.Point(3, 430);
-            this.picGameover.Name = "picGameover";
-            this.picGameover.Size = new System.Drawing.Size(303, 117);
-            this.picGameover.TabIndex = 3;
-            this.picGameover.Text = "Game over\r\nPress F1 to restart\r\nPress Esc to quit\r\n";
+            this.picMilieu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
+            this.picMilieu.BackColor = System.Drawing.Color.White;
+            this.picMilieu.Location = new System.Drawing.Point(324, 3);
+            this.picMilieu.Name = "picMilieu";
+            this.picMilieu.Size = new System.Drawing.Size(10, 541);
+            this.picMilieu.TabIndex = 1;
+            this.picMilieu.TabStop = false;
+            // 
+            // pongTimer
+            // 
+            this.pongTimer.Interval = 1;
+            this.pongTimer.Tick += new System.EventHandler(this.pongTimer_Tick);
             // 
             // Form1
             // 
