@@ -79,7 +79,7 @@
             this.picMilieu.BackColor = System.Drawing.Color.White;
             this.picMilieu.Location = new System.Drawing.Point(324, 3);
             this.picMilieu.Name = "picMilieu";
-            this.picMilieu.Size = new System.Drawing.Size(10, 541);
+            this.picMilieu.Size = new System.Drawing.Size(10, 551);
             this.picMilieu.TabIndex = 1;
             this.picMilieu.TabStop = false;
             // 

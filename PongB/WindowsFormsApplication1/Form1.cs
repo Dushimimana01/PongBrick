@@ -45,7 +45,7 @@ namespace WindowsFormsApplication1
 
             Cursor.Hide();
             picBalle = new Balle (7);
-            picBalle.resetBall(playground);
+            picBalle.Location = new Point(ClientSize.Width / 2 - picBalle.Width / 2, ClientSize.Height / 2 - picBalle.Height / 2); ;
             playground.Controls.Add(picBalle);
 
             pongTimer.Enabled = true;
